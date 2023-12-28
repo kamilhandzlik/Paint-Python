@@ -1,5 +1,6 @@
 from sqlite3 import Row
-from utils import * 
+from utils import *
+from utils.buttons import Button 
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Drawing Program")
@@ -29,10 +30,13 @@ def draw_grid(win, grid):
             pygame.draw.line(win, BLACK, (i * PIXEL_SIZE, 0),
                             (i * PIXEL_SIZE, HEIGHT - TOOLBAR_HEIGHT))
 
-def draw(win, grid):
+def draw(win, grid, buttons):
     win.fill(BG_COLOR)
     draw_grid(win, grid)
     pygame.display.update()
+
+    for button in buttons:
+        button.draw(win)
 
 def get_row_col_from_pos(pos):
     x, y = pos
@@ -49,6 +53,16 @@ clock = pygame.time.Clock()
 grid = init_grid(ROWS, COLS, BG_COLOR)
 drawing_color = BLACK
 
+button_y = HEIGHT - TOOLBAR_HEIGHT/2 -25
+buttons = [
+    Button(10, button_y, 50, 50, BLACK),
+    Button(70, button_y, 50, 50, RED),
+    Button(130, button_y, 50, 50, GREEN),
+    Button(190, button_y, 50, 50, BLUE),
+    Button(250, button_y, 50, 50, WHITE, "Eraser", BLACK),
+    Button(310, button_y, 50, 50, WHITE, "Clear", BLACK)
+    ]
+
 while run:
     clock.tick(FPS)
 
@@ -63,6 +77,6 @@ while run:
                 grid[row][col] = drawing_color
             except IndexError:
                 pass
-    draw(WIN, grid)
+    draw(WIN, grid, buttons)
 
 pygame.quit()
