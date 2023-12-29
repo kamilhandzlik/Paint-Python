@@ -31,10 +31,10 @@ def draw_grid(win, grid):
 def draw(win, grid, buttons):
     win.fill(BG_COLOR)
     draw_grid(win, grid)
-    pygame.display.update()
 
     for button in buttons:
         button.draw(win)
+    pygame.display.update()
 
 def get_row_col_from_pos(pos):
     x, y = pos
