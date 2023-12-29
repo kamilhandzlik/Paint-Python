@@ -1,6 +1,4 @@
-from sqlite3 import Row
 from utils import *
-from utils.buttons import Button 
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Drawing Program")
